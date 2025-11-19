@@ -1,87 +1,94 @@
+/* ===============================
+   RESET Y BASE
+=============================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+:root {
+    --color-bg: #121212;
+    --color-primary: #ff0000;
+    --color-primary-dark: #e60000;
+    --color-text-light: #fff;
+    --color-text-dark: #333;
+    --radius: 10px;
+    --font-main: Arial, sans-serif;
+    --transition: 0.3s ease;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #121212;
-    height: 100vh;
+    font-family: var(--font-main);
+    background-color: var(--color-bg);
+    min-height: 100vh;
     overflow-x: hidden;
-    animation: fadeInBody 1s ease-out;
+    animation: fadeIn 1s ease-out;
+    color: var(--color-text-light);
 }
 
-@keyframes fadeInBody {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+/* ===============================
+   ANIMACIONES GENERALES
+=============================== */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===============================
+   HEADER PRINCIPAL
+=============================== */
 .main-header {
     position: relative;
     z-index: 10;
     padding: 20px;
     text-align: center;
-    color: white;
     opacity: 0;
-    animation: fadeInHeader 1s forwards 0.5s;
-}
-
-@keyframes fadeInHeader {
-    to {
-        opacity: 1;
-    }
+    animation: fadeIn 1s forwards 0.5s;
 }
 
 .main-header h1 {
-    font-size: 3rem;
+    font-size: clamp(2rem, 5vw, 3rem); /* responsivo */
     font-weight: bold;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
-    color: red;
-    margin-top: 20%;
+    color: var(--color-primary);
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+    margin-top: 15%;
+    opacity: 0;
     animation: slideInTitle 1s ease-out forwards;
 }
 
 @keyframes slideInTitle {
-    from {
-        transform: translateY(-50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }
 
 .main-header button {
-    background-color: #ff0000;
-    color: white;
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
     border: none;
     padding: 15px 30px;
     font-size: 1.2rem;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: var(--radius);
     margin-top: 20px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
     opacity: 0;
-    animation: fadeInButton 1s forwards 1.2s;
-}
-
-@keyframes fadeInButton {
-    to {
-        opacity: 1;
-    }
+    animation: fadeIn 1s forwards 1.2s;
+    transition: background-color var(--transition), transform var(--transition);
 }
 
 .main-header button:hover {
-    background-color: #e60000;
+    background-color: var(--color-primary-dark);
     transform: scale(1.1);
 }
 
+/* ===============================
+   IMAGEN DE FONDO
+=============================== */
 .background-image {
     position: absolute;
     top: 0;
@@ -92,100 +99,104 @@ body {
     animation: zoomInBackground 10s infinite alternate;
 }
 
-@keyframes zoomInBackground {
-    0% {
-        transform: scale(1.05);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
 .background-image img {
     width: 100%;
     height: 100vh;
     object-fit: cover;
 }
 
-.secciones {
-    background-color: #f4f4f4;
-    padding: 40px 20px;
-    max-width: 1100px;
-    margin: 0 auto;
-    animation: fadeInSection 1s ease-out;
+@keyframes zoomInBackground {
+    0% { transform: scale(1.05); }
+    100% { transform: scale(1); }
 }
 
-@keyframes fadeInSection {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* ===============================
+   SECCIONES
+=============================== */
+.secciones {
+    background-color: #f4f4f4;
+    color: var(--color-text-dark);
+    padding: 60px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+    animation: fadeInUp 1s ease-out;
 }
 
 .secciones h2 {
     text-align: center;
-    font-size: 2.5rem;
-    color: #333;
-    margin-bottom: 20px;
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    margin-bottom: 40px;
 }
 
+/* ===============================
+   BLOQUES DE TEXTO
+=============================== */
 .texto {
-    background-color: red;
-    padding: 20px;
-    margin: 15px 0;
-    border-radius: 10px;
-    border: 2px solid white;
-    position: relative;
+    background-color: var(--color-primary);
+    padding: 25px;
+    margin: 20px 0;
+    border-radius: var(--radius);
+    border: 2px solid var(--color-text-light);
     opacity: 0;
     transform: translateY(30px);
     animation: fadeInUp 0.8s forwards 0.5s;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    transition: transform var(--transition), box-shadow var(--transition);
 }
 
 .texto h3 {
     font-size: 1.8rem;
-    color: black;
     margin-bottom: 10px;
+    color: black;
 }
 
 .texto p {
     font-size: 1.1rem;
-    color: black;
     line-height: 1.6;
+    color: black;
 }
 
 .texto:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
 }
 
+/* ===============================
+   FOOTER
+=============================== */
 footer {
     text-align: center;
     padding: 20px;
     background-color: #222;
-    color: white;
+    color: var(--color-text-light);
     font-size: 1rem;
     opacity: 0;
-    animation: fadeInFooter 1s forwards 2s;
-}
-
-@keyframes fadeInFooter {
-    to {
-        opacity: 1;
-    }
+    animation: fadeIn 1s forwards 2s;
 }
 
 footer p {
     margin: 0;
 }
+
+/* ===============================
+   RESPONSIVE
+=============================== */
+@media (max-width: 768px) {
+    .main-header h1 {
+        margin-top: 10%;
+    }
+    
+    .main-header button {
+        padding: 12px 24px;
+        font-size: 1rem;
+    }
+
+    .texto h3 {
+        font-size: 1.5rem;
+    }
+
+    .texto p {
+        font-size: 1rem;
+    }
+}
+
+/* mejorado
